@@ -37,11 +37,14 @@ router.get('/users/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/users/created', (req, res, next) => {
-  const userToCreate = req.body;
-  userCreateOne(userToCreate)
+router.post('/users/login', (req, res, next) => {
+  const {
+    userId,
+  } = req.params;
+
+  userFindOneById(userId)
     .then((user) => {
-      res.render('userCreated', { user });
+      res.render('user', { user });
     })
     .catch((err) => {
       next(err);
