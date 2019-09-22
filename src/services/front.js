@@ -33,6 +33,21 @@ router.post('/users/created', (req, res, next) => {
     });
 });
 
+router.get('/users/login', (req, res) => {
+  res.render('login');
+});
+
+router.post('/users/created', (req, res, next) => {
+  const userToCreate = req.body;
+  userCreateOne(userToCreate)
+    .then((user) => {
+      res.render('userCreated', { user });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get('/users/:userId', (req, res, next) => {
   const {
     userId,
